@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie.entity';
+import { CreateMovieDto } from './dto/create-movie.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -26,21 +27,22 @@ export class MoviesController {
   }
   // Get search가 다른 Get id 보다아래에 있으면 아래에있는 search가 id로 반환 주의
 
-  @Get('/:id')
-  getOne(@Param('id') movieId: string) {
+  @Get(':id')
+  getOne(@Param('id') movieId: number): Movie {
+    console.log('ter', typeof movieId);
     return this.moviesService.getOne(movieId);
   }
   @Post()
-  create(@Body() movieData) {
+  create(@Body() movieData: CreateMovieDto) {
     return this.moviesService.create(movieData);
   }
   @Delete('/:id')
-  remove(@Param('id') movieId: string) {
+  remove(@Param('id') movieId: number) {
     return this.moviesService.deleteOne(movieId);
   }
 
   @Patch('/:id')
-  path(@Param('id') movieId: string, @Body() updateData) {
+  path(@Param('id') movieId: number, @Body() updateData) {
     return this.moviesService.update(movieId, updateData);
   }
 }
