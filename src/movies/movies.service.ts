@@ -16,7 +16,7 @@ export class MoviesService {
       throw new NotFoundException(`${id}를 찾을 수 없습니다.`);
     }
     return movie;
-  } // +id = string을 number로 변환  parseInt
+  }
 
   deleteOne(id: number) {
     this.getOne(id); //getOne의 에러코드와 공유
